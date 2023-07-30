@@ -2,8 +2,12 @@ import * as THREE from 'three';
 
 class SolarSystem3D{
 
-    #scene; #renderer;
-    #camera;
+    // scene configuration
+    #scene; #renderer; #camera;
+
+    // scene entities
+    #suMod; #meMod; #veMod; #eaMod; #maMod; #juMod; #saMod; #urMod; #neMod; // models
+    #sun; #mercury; #venus; #earth; #mars; #jupiter; #saturn; #uranus; #neptune; // objects
 
     #initScene(){
         
@@ -22,31 +26,28 @@ class SolarSystem3D{
         // load textures
 
         const suTe = new THREE.TextureLoader().load("textures/sun.jpg");
-        const suMat = new THREE.MeshBasicMaterial({ map: suTe });
-
         const meTe = new THREE.TextureLoader().load("textures/planets/mercury.jpg");
-        const meMat = new THREE.MeshBasicMaterial({ map: meTe });
-
         const veTe = new THREE.TextureLoader().load("textures/planets/venus.jpg");
-        const veMat = new THREE.MeshBasicMaterial({ map: veTe });
-
         const eaTe = new THREE.TextureLoader().load("textures/planets/earth.jpg");
-        const eaMat = new THREE.MeshBasicMaterial({ map: eaTe });
-
         const maTe = new THREE.TextureLoader().load("textures/planets/mars.jpg");
-        const maMat = new THREE.MeshBasicMaterial({ map: maTe });
-
         const juTe = new THREE.TextureLoader().load("textures/planets/jupiter.jpg");
-        const juMat = new THREE.MeshBasicMaterial({ map: juTe });
-        
         const saTe = new THREE.TextureLoader().load("textures/planets/saturn.jpg");
-        const saMat = new THREE.MeshBasicMaterial({ map: saTe });
-
         const urTe = new THREE.TextureLoader().load("textures/planets/uranus.jpg");
-        const urMat = new THREE.MeshBasicMaterial({ map: urTe });
-
         const neTe = new THREE.TextureLoader().load("textures/planets/neptune.jpg");
+        
+
+        // create materials
+
+        const suMat = new THREE.MeshBasicMaterial({ map: suTe });
+        const meMat = new THREE.MeshBasicMaterial({ map: meTe });
+        const veMat = new THREE.MeshBasicMaterial({ map: veTe });
+        const eaMat = new THREE.MeshBasicMaterial({ map: eaTe });
+        const maMat = new THREE.MeshBasicMaterial({ map: maTe });
+        const juMat = new THREE.MeshBasicMaterial({ map: juTe });
+        const saMat = new THREE.MeshBasicMaterial({ map: saTe });
+        const urMat = new THREE.MeshBasicMaterial({ map: urTe });
         const neMat = new THREE.MeshBasicMaterial({ map: neTe });
+
 
         // create mesh
 
@@ -55,34 +56,34 @@ class SolarSystem3D{
 
         // create models
         
-        const sun = new THREE.Mesh(sphere, suMat);
-        const mercury = new THREE.Mesh(sphere, meMat);
-        const venus = new THREE.Mesh(sphere, veMat);
-        const earth = new THREE.Mesh(sphere, eaMat);
-        const mars = new THREE.Mesh(sphere, maMat);
-        const jupiter = new THREE.Mesh(sphere, juMat);
-        const saturn = new THREE.Mesh(sphere, saMat);
-        const neptune = new THREE.Mesh(sphere, neMat);
-        const uranus = new THREE.Mesh(sphere, urMat);
+        this.#suMod = new THREE.Mesh(sphere, suMat);
+        this.#meMod = new THREE.Mesh(sphere, meMat);
+        this.#veMod = new THREE.Mesh(sphere, veMat);
+        this.#eaMod = new THREE.Mesh(sphere, eaMat);
+        this.#maMod = new THREE.Mesh(sphere, maMat);
+        this.#juMod = new THREE.Mesh(sphere, juMat);
+        this.#saMod = new THREE.Mesh(sphere, saMat);
+        this.#neMod = new THREE.Mesh(sphere, neMat);
+        this.#urMod = new THREE.Mesh(sphere, urMat);
 
-        this.#scene.add(sun);
-        this.#scene.add(mercury);
-        this.#scene.add(venus);
-        this.#scene.add(earth);
-        this.#scene.add(mars);
-        this.#scene.add(jupiter);
-        this.#scene.add(saturn);
-        this.#scene.add(neptune);
-        this.#scene.add(uranus);
+        this.#scene.add(this.#suMod);
+        this.#scene.add(this.#meMod);
+        this.#scene.add(this.#veMod);
+        this.#scene.add(this.#eaMod);
+        this.#scene.add(this.#maMod);
+        this.#scene.add(this.#juMod);
+        this.#scene.add(this.#saMod);
+        this.#scene.add(this.#neMod);
+        this.#scene.add(this.#urMod);
 
     }
 
-    #setViewProjection(){
+    #setViewProjectionMatrix(){
         
-        const   fovy = 90,
-                ar = window.innerWidth / window.innerHeight,
-                nearPlane = 0.1,
-                farPlane = 1000;
+        const fovy = 90;
+        const ar = window.innerWidth / window.innerHeight;
+        const nearPlane = 0.1;
+        const farPlane = 1000;
 
         this.#camera = new THREE.PerspectiveCamera(
             fovy,
@@ -106,7 +107,7 @@ class SolarSystem3D{
 
         this.#initScene();
         this.#loadModels();
-        this.#setViewProjection();
+        this.#setViewProjectionMatrix();
         this.#animate();
 
     }
