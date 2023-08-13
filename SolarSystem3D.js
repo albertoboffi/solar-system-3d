@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import Planet from './Planet.js';
 
 class SolarSystem3D{
 
@@ -7,7 +8,7 @@ class SolarSystem3D{
 
     // scene entities
     #suMod; #meMod; #veMod; #eaMod; #maMod; #juMod; #saMod; #urMod; #neMod; // models
-    #sun; #mercury; #venus; #earth; #mars; #jupiter; #saturn; #uranus; #neptune; // objects
+    #mercury; #venus; #earth; #mars; #jupiter; #saturn; #uranus; #neptune; // objects
 
     #initScene(){
         
@@ -35,7 +36,6 @@ class SolarSystem3D{
         const urTe = new THREE.TextureLoader().load("textures/planets/uranus.jpg");
         const neTe = new THREE.TextureLoader().load("textures/planets/neptune.jpg");
         
-
         // create materials
 
         const suMat = new THREE.MeshBasicMaterial({ map: suTe });
@@ -47,7 +47,6 @@ class SolarSystem3D{
         const saMat = new THREE.MeshBasicMaterial({ map: saTe });
         const urMat = new THREE.MeshBasicMaterial({ map: urTe });
         const neMat = new THREE.MeshBasicMaterial({ map: neTe });
-
 
         // create mesh
 
@@ -75,6 +74,18 @@ class SolarSystem3D{
         this.#scene.add(this.#saMod);
         this.#scene.add(this.#neMod);
         this.#scene.add(this.#urMod);
+    }
+
+    #setController(){
+        
+        this.#mercury = new Planet(1, 3, 2, 2, "mercury");
+
+    }
+
+    #setWorldMatrix(){
+
+        // this.#suMod.position.copy(new THREE.Vector3(0, 0, 0));
+        // ....
 
     }
 
@@ -107,6 +118,8 @@ class SolarSystem3D{
 
         this.#initScene();
         this.#loadModels();
+        this.#setController();
+        this.#setWorldMatrix();
         this.#setViewProjectionMatrix();
         this.#animate();
 
