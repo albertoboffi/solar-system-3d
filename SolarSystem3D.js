@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import Planet from './Planet.js';
+import Controller from './Controller.js';
 
 class SolarSystem3D{
 
@@ -9,6 +9,9 @@ class SolarSystem3D{
     // scene entities
     #suMod; #meMod; #veMod; #eaMod; #maMod; #juMod; #saMod; #urMod; #neMod; // models
     #mercury; #venus; #earth; #mars; #jupiter; #saturn; #uranus; #neptune; // objects
+
+    //controller
+    #controller;
 
     #initScene(){
         
@@ -74,11 +77,21 @@ class SolarSystem3D{
         this.#scene.add(this.#saMod);
         this.#scene.add(this.#neMod);
         this.#scene.add(this.#urMod);
+        
     }
 
     #setController(){
         
-        this.#mercury = new Planet(1, 3, 2, 2, "mercury");
+        this.#controller = new Controller(1, 3, 2, 2);
+
+        this.#mercury = this.#controller.createPlanet("mercury");
+        this.#venus = this.#controller.createPlanet("venus");
+        this.#earth = this.#controller.createPlanet("earth");
+        this.#mars = this.#controller.createPlanet("mars");
+        this.#jupiter = this.#controller.createPlanet("jupiter");
+        this.#saturn = this.#controller.createPlanet("saturn");
+        this.#neptune = this.#controller.createPlanet("neptune");
+        this.#uranus = this.#controller.createPlanet("uranus");
 
     }
 
