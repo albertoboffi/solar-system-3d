@@ -87,4 +87,53 @@ export default class Planet{
 
     }
 
+    updatePosition(deltaT){
+
+        this.#phi += deltaT * this.#rev_speed;
+        this.#phi %= 2 * Math.PI;
+
+    }
+
+    updateRotation(deltaT){
+
+        this.#theta += deltaT * this.#rot_speed;
+        this.#theta %= 2 * Math.PI;
+
+    }
+
+    getSize(){
+        
+        return this.#radius;
+
+    }
+
+    getTilt(){
+
+        return this.#tilt;
+
+    }
+
+    getRotation(){
+
+        return this.#theta;
+
+    }
+
+    getPosition(){
+
+        let position = {};
+
+        // flat orbit position
+        position.x = this.#a * Math.cos(this.#phi) - this.#c.x;
+        position.y = 0 - this.#c.y;
+        position.z = this.#b * Math.sin(this.#phi) - this.#c.z;
+        
+        // projection of the point on the inclined orbit
+        position.x = x * Math.cos(this.#inclination) - y * Math.sin(this.#inclination);
+        position.y = x * Math.sin(this.#inclination) + y * Math.cos(this.#inclination);
+
+        return position;
+
+    }
+
 }
