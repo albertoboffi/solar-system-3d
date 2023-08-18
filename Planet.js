@@ -1,18 +1,24 @@
+import SolarSystemData from './solar-system-data.js';
+
 export default class Planet{
     
     // SHAPE
-    #radius = {}; #tilt;
+    #radius = {};
+    #tilt;
 
     // ROTATION
     #theta;
 
     // ORBIT
-    #a; #b; #c = {}; // semi-major axis, semi-minor axis, center
+    #a;
+    #b;
+    #c = {}; // semi-major axis, semi-minor axis, center
     #inclination;
     #phi; // track of the position of the planet around the orbit
 
     // ANGULAR SPEEDS
-    #rot_speed; #rev_speed;
+    #rot_speed;
+    #rev_speed;
 
     #getRatio(earth_app_val, planet_val, earth_val){
         
@@ -64,26 +70,21 @@ export default class Planet{
     }
 
     constructor(earth_xradius, earth_a, earth_rotperiod, earth_revperiod, planet_name){
-
-        fetch("solar-system-data.json")
-        .then(response => response.json()).then(json => {
             
-            const planet_data = json[planet_name];
-            const earth_data = json["earth"];
+        const planet_data = SolarSystemData[planet_name];
+        const earth_data = SolarSystemData["earth"];
 
-            // SHAPE
-            this.#setShape(earth_xradius, planet_data["shape"], earth_data["shape"]);
+        // SHAPE
+        this.#setShape(earth_xradius, planet_data["shape"], earth_data["shape"]);
             
-            // ROTATION
-            this.#theta = 0;
+        // ROTATION
+        this.#theta = 0;
 
-            // ORBIT
-            this.#setOrbit(earth_a, planet_data["orbit"], earth_data["orbit"]);
+        // ORBIT
+        this.#setOrbit(earth_a, planet_data["orbit"], earth_data["orbit"]);
 
-            // SPEEDS
-            this.#setSpeeds(earth_rotperiod, earth_revperiod, planet_data["periods"], earth_data["periods"]);
-
-        });
+        // SPEEDS
+        this.#setSpeeds(earth_rotperiod, earth_revperiod, planet_data["periods"], earth_data["periods"]);
 
     }
 
