@@ -53,7 +53,7 @@ class SolarSystem3D{
 
         // create mesh
 
-        const sphereRadius = 1, sphereXSegments = 100, sphereYSegments = 30;
+        const sphereRadius = 1, sphereXSegments = 100, sphereYSegments = 100;
         const sphere = new THREE.SphereGeometry(sphereRadius, sphereXSegments, sphereYSegments);
 
         // create models
@@ -82,7 +82,12 @@ class SolarSystem3D{
 
     #setController(){
         
-        this.#controller = new Controller(1, 3, 2, 2);
+        let earth_xradius = 0.3; // earth local x-radius
+        let earth_a = 2; // earth orbit local semi-major axis
+        let earth_rotperiod = 5; // earth rotation period in seconds
+        let earth_revperiod = 10; // earth revolution period in seconds
+
+        this.#controller = new Controller(earth_xradius, earth_a, earth_rotperiod, earth_revperiod);
 
         this.#mercury = this.#controller.createPlanet("mercury");
         this.#venus = this.#controller.createPlanet("venus");
@@ -97,8 +102,64 @@ class SolarSystem3D{
 
     #setWorldMatrix(){
 
-        // this.#suMod.position.copy(new THREE.Vector3(0, 0, 0));
-        // ....
+        let mercury_radius = this.#mercury.getSize();
+        let venus_radius = this.#venus.getSize();
+        let earth_radius = this.#earth.getSize();
+        let mars_radius = this.#mars.getSize();
+        let jupiter_radius = this.#jupiter.getSize();
+        let saturn_radius = this.#saturn.getSize();
+        let neptune_radius = this.#neptune.getSize();
+        let uranus_radius = this.#uranus.getSize();
+
+        // this.#suMod.scale.copy(new THREE.Vector3(1, 1, 1));
+
+        this.#meMod.scale.copy(new THREE.Vector3(
+            mercury_radius.x,
+            mercury_radius.y,
+            mercury_radius.z
+        ));
+        
+        this.#veMod.scale.copy(new THREE.Vector3(
+            venus_radius.x,
+            venus_radius.y,
+            venus_radius.z
+        ));
+
+        this.#eaMod.scale.copy(new THREE.Vector3(
+            earth_radius.x,
+            earth_radius.y,
+            earth_radius.z
+        ));
+
+        this.#maMod.scale.copy(new THREE.Vector3(
+            mars_radius.x,
+            mars_radius.y,
+            mars_radius.z
+        ));
+
+        this.#juMod.scale.copy(new THREE.Vector3(
+            jupiter_radius.x,
+            jupiter_radius.y,
+            jupiter_radius.z
+        ));
+
+        this.#saMod.scale.copy(new THREE.Vector3(
+            saturn_radius.x,
+            saturn_radius.y,
+            saturn_radius.z
+        ));
+
+        this.#neMod.scale.copy(new THREE.Vector3(
+            neptune_radius.x,
+            neptune_radius.y,
+            neptune_radius.z
+        ));
+
+        this.#urMod.scale.copy(new THREE.Vector3(
+            uranus_radius.x,
+            uranus_radius.y,
+            uranus_radius.z
+        ));
 
     }
 
