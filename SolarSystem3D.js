@@ -4,7 +4,10 @@ import Controller from './Controller.js';
 class SolarSystem3D{
 
     // scene configuration
-    #scene; #renderer; #camera;
+    #scene;
+    #renderer;
+    #camera;
+    #clock;
 
     // scene entities
     #suMod; #meMod; #veMod; #eaMod; #maMod; #juMod; #saMod; #urMod; #neMod; // models
@@ -16,6 +19,7 @@ class SolarSystem3D{
     #initScene(){
         
         this.#scene = new THREE.Scene();
+        this.#clock = new THREE.Clock();
 
         this.#renderer = new THREE.WebGLRenderer({ antialias: true });
         this.#renderer.setSize(window.innerWidth, window.innerHeight);
@@ -34,10 +38,10 @@ class SolarSystem3D{
         const veTe = new THREE.TextureLoader().load("textures/planets/venus.jpg");
         const eaTe = new THREE.TextureLoader().load("textures/planets/earth.jpg");
         const maTe = new THREE.TextureLoader().load("textures/planets/mars.jpg");
-        const juTe = new THREE.TextureLoader().load("textures/planets/jupiter.jpg");
-        const saTe = new THREE.TextureLoader().load("textures/planets/saturn.jpg");
-        const urTe = new THREE.TextureLoader().load("textures/planets/uranus.jpg");
-        const neTe = new THREE.TextureLoader().load("textures/planets/neptune.jpg");
+        //const juTe = new THREE.TextureLoader().load("textures/planets/jupiter.jpg");
+        //const saTe = new THREE.TextureLoader().load("textures/planets/saturn.jpg");
+        //const urTe = new THREE.TextureLoader().load("textures/planets/uranus.jpg");
+        //const neTe = new THREE.TextureLoader().load("textures/planets/neptune.jpg");
         
         // create materials
 
@@ -46,10 +50,10 @@ class SolarSystem3D{
         const veMat = new THREE.MeshBasicMaterial({ map: veTe });
         const eaMat = new THREE.MeshBasicMaterial({ map: eaTe });
         const maMat = new THREE.MeshBasicMaterial({ map: maTe });
-        const juMat = new THREE.MeshBasicMaterial({ map: juTe });
-        const saMat = new THREE.MeshBasicMaterial({ map: saTe });
-        const urMat = new THREE.MeshBasicMaterial({ map: urTe });
-        const neMat = new THREE.MeshBasicMaterial({ map: neTe });
+        //const juMat = new THREE.MeshBasicMaterial({ map: juTe });
+        //const saMat = new THREE.MeshBasicMaterial({ map: saTe });
+        //const urMat = new THREE.MeshBasicMaterial({ map: urTe });
+        //const neMat = new THREE.MeshBasicMaterial({ map: neTe });
 
         // create mesh
 
@@ -63,27 +67,27 @@ class SolarSystem3D{
         this.#veMod = new THREE.Mesh(sphere, veMat);
         this.#eaMod = new THREE.Mesh(sphere, eaMat);
         this.#maMod = new THREE.Mesh(sphere, maMat);
-        this.#juMod = new THREE.Mesh(sphere, juMat);
-        this.#saMod = new THREE.Mesh(sphere, saMat);
-        this.#neMod = new THREE.Mesh(sphere, neMat);
-        this.#urMod = new THREE.Mesh(sphere, urMat);
+        //this.#juMod = new THREE.Mesh(sphere, juMat);
+        //this.#saMod = new THREE.Mesh(sphere, saMat);
+        //this.#urMod = new THREE.Mesh(sphere, urMat);
+        //this.#neMod = new THREE.Mesh(sphere, neMat);
 
         this.#scene.add(this.#suMod);
         this.#scene.add(this.#meMod);
         this.#scene.add(this.#veMod);
         this.#scene.add(this.#eaMod);
         this.#scene.add(this.#maMod);
-        this.#scene.add(this.#juMod);
-        this.#scene.add(this.#saMod);
-        this.#scene.add(this.#neMod);
-        this.#scene.add(this.#urMod);
+        //this.#scene.add(this.#juMod);
+        //this.#scene.add(this.#saMod);
+        //this.#scene.add(this.#urMod);
+        //this.#scene.add(this.#neMod);
         
     }
 
     #setController(){
         
         var earth_xradius = 0.3; // earth local x-radius
-        var earth_a = 2; // earth orbit local semi-major axis
+        var earth_a = 4.3; // earth orbit local semi-major axis
         var earth_rotperiod = 5; // earth rotation period in seconds
         var earth_revperiod = 10; // earth revolution period in seconds
 
@@ -93,10 +97,10 @@ class SolarSystem3D{
         this.#venus = this.#controller.createPlanet("venus");
         this.#earth = this.#controller.createPlanet("earth");
         this.#mars = this.#controller.createPlanet("mars");
-        this.#jupiter = this.#controller.createPlanet("jupiter");
-        this.#saturn = this.#controller.createPlanet("saturn");
-        this.#neptune = this.#controller.createPlanet("neptune");
-        this.#uranus = this.#controller.createPlanet("uranus");
+        //this.#jupiter = this.#controller.createPlanet("jupiter");
+        //this.#saturn = this.#controller.createPlanet("saturn");
+        //this.#uranus = this.#controller.createPlanet("uranus");
+        //this.#neptune = this.#controller.createPlanet("neptune");
 
     }
 
@@ -106,10 +110,10 @@ class SolarSystem3D{
         var venus_radius = this.#venus.getSize();
         var earth_radius = this.#earth.getSize();
         var mars_radius = this.#mars.getSize();
-        var jupiter_radius = this.#jupiter.getSize();
-        var saturn_radius = this.#saturn.getSize();
-        var neptune_radius = this.#neptune.getSize();
-        var uranus_radius = this.#uranus.getSize();
+        //var jupiter_radius = this.#jupiter.getSize();
+        //var saturn_radius = this.#saturn.getSize();
+        //var uranus_radius = this.#uranus.getSize();
+        //var neptune_radius = this.#neptune.getSize();
 
         // this.#suMod.scale.copy(new THREE.Vector3(1, 1, 1));
 
@@ -137,7 +141,7 @@ class SolarSystem3D{
             mars_radius.z
         ));
 
-        this.#juMod.scale.copy(new THREE.Vector3(
+        /* this.#juMod.scale.copy(new THREE.Vector3(
             jupiter_radius.x,
             jupiter_radius.y,
             jupiter_radius.z
@@ -149,17 +153,17 @@ class SolarSystem3D{
             saturn_radius.z
         ));
 
-        this.#neMod.scale.copy(new THREE.Vector3(
-            neptune_radius.x,
-            neptune_radius.y,
-            neptune_radius.z
-        ));
-
         this.#urMod.scale.copy(new THREE.Vector3(
             uranus_radius.x,
             uranus_radius.y,
             uranus_radius.z
         ));
+
+        this.#neMod.scale.copy(new THREE.Vector3(
+            neptune_radius.x,
+            neptune_radius.y,
+            neptune_radius.z
+        )); */
 
     }
 
@@ -186,8 +190,7 @@ class SolarSystem3D{
         requestAnimationFrame(this.#animate.bind(this));
 
         // get time interval
-        var clock = new THREE.Clock();
-        var deltaT = clock.getDelta();
+        var deltaT = this.#clock.getDelta();
 
         // update planets 
         this.#mercury.updatePosition(deltaT);

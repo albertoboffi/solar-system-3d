@@ -10,9 +10,9 @@ export default class Planet{
     #theta;
 
     // ORBIT
-    #a;
-    #b;
-    #c = {}; // semi-major axis, semi-minor axis, center
+    #a; // semi-major axis
+    #b; // semi-minor axis
+    #c = {}; // center
     #inclination;
     #phi; // track of the position of the planet around the orbit
 
@@ -40,13 +40,13 @@ export default class Planet{
 
         // Ellipse axis
 
-        this.#a = this.#getRatio(earth_a, planet_orbit["semi-major_axis"], earth_orbit["semi-major_axis"]);
+        this.#a = this.#getRatio(earth_a, planet_orbit["semi_major_axis"], earth_orbit["semi_major_axis"]);
         this.#b = this.#a * Math.sqrt(1 - Math.pow(planet_orbit["eccentricity"], 2));
 
         // Ellipse center
         
-        const radius_diff = planet_orbit["aphelion"] - planet_orbit["semi-major_axis"];
-        const c_shift = this.#getRatio(earth_a, radius_diff, earth_orbit["semi-major_axis"]);
+        const radius_diff = planet_orbit["aphelion"] - planet_orbit["semi_major_axis"];
+        const c_shift = this.#getRatio(earth_a, radius_diff, earth_orbit["semi_major_axis"]);
         
         if (planet_orbit["aphelion_dir"] == 'r') this.#c.x = - c_shift;
         else this.#c.x = c_shift;
