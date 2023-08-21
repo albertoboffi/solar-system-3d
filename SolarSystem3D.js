@@ -181,7 +181,7 @@ class SolarSystem3D{
             farPlane
         );
 
-        this.#camera.position.set(0, 0, 5);
+        this.#camera.position.set(0, 0, 8);
 
     }
 
@@ -196,9 +196,51 @@ class SolarSystem3D{
         this.#mercury.updatePosition(deltaT);
         this.#mercury.updateRotation(deltaT);
 
+        this.#venus.updatePosition(deltaT);
+        this.#venus.updateRotation(deltaT);
+
+        this.#earth.updatePosition(deltaT);
+        this.#earth.updateRotation(deltaT);
+
+        this.#mars.updatePosition(deltaT);
+        this.#mars.updateRotation(deltaT);
+
+        //this.#jupiter.updatePosition(deltaT);
+        //this.#jupiter.updateRotation(deltaT);
+
+        //this.#saturn.updatePosition(deltaT);
+        //this.#saturn.updateRotation(deltaT);
+
+        //this.#uranus.updatePosition(deltaT);
+        //this.#uranus.updateRotation(deltaT);
+
+        //this.#neptune.updatePosition(deltaT);
+        //this.#neptune.updateRotation(deltaT);
+
         // get planets data
         var mercury_position = this.#mercury.getPosition();
         var mercury_rotation = this.#mercury.getRotation();
+
+        var venus_position = this.#venus.getPosition();
+        var venus_rotation = this.#venus.getRotation();
+
+        var earth_position = this.#earth.getPosition();
+        var earth_rotation = this.#earth.getRotation();
+
+        var mars_position = this.#mars.getPosition();
+        var mars_rotation = this.#mars.getRotation();
+
+        //var jupiter_position = this.#jupiter.getPosition();
+        //var jupiter_rotation = this.#jupiter.getRotation();
+
+        //var saturn_position = this.#saturn.getPosition();
+        //var saturn_rotation = this.#saturn.getRotation();
+
+        //var uranus_position = this.#uranus.getPosition();
+        //var uranus_rotation = this.#uranus.getRotation();
+
+        //var neptune_position = this.#neptune.getPosition();
+        //var neptune_rotation = this.#neptune.getRotation();
 
         // render planets
         this.#meMod.position.copy(new THREE.Vector3(
@@ -206,6 +248,48 @@ class SolarSystem3D{
             mercury_position.y,
             mercury_position.z
         ));
+
+        this.#veMod.position.copy(new THREE.Vector3(
+            venus_position.x,
+            venus_position.y,
+            venus_position.z
+        ));
+
+        this.#eaMod.position.copy(new THREE.Vector3(
+            earth_position.x,
+            earth_position.y,
+            earth_position.z
+        ));
+
+        this.#maMod.position.copy(new THREE.Vector3(
+            mars_position.x,
+            mars_position.y,
+            mars_position.z
+        ));
+
+        /* this.#juMod.position.copy(new THREE.Vector3(
+            jupiter_position.x,
+            jupiter_position.y,
+            jupiter_position.z
+        ));
+
+        this.#saMod.position.copy(new THREE.Vector3(
+            saturn_position.x,
+            saturn_position.y,
+            saturn_position.z
+        ));
+
+        this.#urMod.position.copy(new THREE.Vector3(
+            uranus_position.x,
+            uranus_position.y,
+            uranus_position.z
+        ));
+
+        this.#neMod.position.copy(new THREE.Vector3(
+            neptune_position.x,
+            neptune_position.y,
+            neptune_position.z
+        )); */
 
 	    this.#renderer.render(this.#scene, this.#camera);
         
