@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import Controller from './Controller.js';
+import { FlyControls } from 'three/addons/controls/FlyControls.js';
 
 class SolarSystem3D{
 
@@ -7,6 +8,7 @@ class SolarSystem3D{
     #scene;
     #renderer;
     #camera;
+    #controls;
     #clock;
 
     // scene entities
@@ -169,6 +171,8 @@ class SolarSystem3D{
 
     #setViewProjectionMatrix(){
         
+        // set perspective camera
+
         const fovy = 90;
         const ar = window.innerWidth / window.innerHeight;
         const nearPlane = 0.1;
@@ -182,6 +186,12 @@ class SolarSystem3D{
         );
 
         this.#camera.position.set(0, 0, 8);
+
+        // set camera motion in fly mode
+        
+        this.#controls = new FlyControls(this.#camera, this.#renderer.domElement);
+        this.#controls.movementSpeed = 2;
+        this.#controls.rollSpeed = 0.5;
 
     }
 
@@ -290,6 +300,8 @@ class SolarSystem3D{
             neptune_position.y,
             neptune_position.z
         )); */
+
+        this.#controls.update(deltaT);
 
 	    this.#renderer.render(this.#scene, this.#camera);
         
