@@ -82,10 +82,10 @@ class SolarSystem3D{
 
     #setController(){
         
-        let earth_xradius = 0.3; // earth local x-radius
-        let earth_a = 2; // earth orbit local semi-major axis
-        let earth_rotperiod = 5; // earth rotation period in seconds
-        let earth_revperiod = 10; // earth revolution period in seconds
+        var earth_xradius = 0.3; // earth local x-radius
+        var earth_a = 2; // earth orbit local semi-major axis
+        var earth_rotperiod = 5; // earth rotation period in seconds
+        var earth_revperiod = 10; // earth revolution period in seconds
 
         this.#controller = new Controller(earth_xradius, earth_a, earth_rotperiod, earth_revperiod);
 
@@ -102,14 +102,14 @@ class SolarSystem3D{
 
     #setWorldMatrix(){
 
-        let mercury_radius = this.#mercury.getSize();
-        let venus_radius = this.#venus.getSize();
-        let earth_radius = this.#earth.getSize();
-        let mars_radius = this.#mars.getSize();
-        let jupiter_radius = this.#jupiter.getSize();
-        let saturn_radius = this.#saturn.getSize();
-        let neptune_radius = this.#neptune.getSize();
-        let uranus_radius = this.#uranus.getSize();
+        var mercury_radius = this.#mercury.getSize();
+        var venus_radius = this.#venus.getSize();
+        var earth_radius = this.#earth.getSize();
+        var mars_radius = this.#mars.getSize();
+        var jupiter_radius = this.#jupiter.getSize();
+        var saturn_radius = this.#saturn.getSize();
+        var neptune_radius = this.#neptune.getSize();
+        var uranus_radius = this.#uranus.getSize();
 
         // this.#suMod.scale.copy(new THREE.Vector3(1, 1, 1));
 
@@ -184,6 +184,26 @@ class SolarSystem3D{
     #animate(){
 
         requestAnimationFrame(this.#animate.bind(this));
+
+        // get time interval
+        var clock = new THREE.Clock();
+        var deltaT = clock.getDelta();
+
+        // update planets 
+        this.#mercury.updatePosition(deltaT);
+        this.#mercury.updateRotation(deltaT);
+
+        // get planets data
+        var mercury_position = this.#mercury.getPosition();
+        var mercury_rotation = this.#mercury.getRotation();
+
+        // render planets
+        this.#meMod.position.copy(new THREE.Vector3(
+            mercury_position.x,
+            mercury_position.y,
+            mercury_position.z
+        ));
+
 	    this.#renderer.render(this.#scene, this.#camera);
         
     }

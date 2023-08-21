@@ -122,7 +122,7 @@ export default class Planet{
 
     getPosition(){
 
-        let position = {};
+        var position = {};
 
         // flat orbit position
         position.x = this.#a * Math.cos(this.#phi) - this.#c.x;
@@ -130,8 +130,8 @@ export default class Planet{
         position.z = this.#b * Math.sin(this.#phi) - this.#c.z;
         
         // projection of the point on the inclined orbit
-        position.x = x * Math.cos(this.#inclination) - y * Math.sin(this.#inclination);
-        position.y = x * Math.sin(this.#inclination) + y * Math.cos(this.#inclination);
+        position.x = position.x * Math.cos(this.#inclination) - position.y * Math.sin(this.#inclination);
+        position.y = position.x * Math.sin(this.#inclination) + position.y * Math.cos(this.#inclination);
 
         return position;
 
