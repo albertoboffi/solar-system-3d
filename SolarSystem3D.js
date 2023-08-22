@@ -90,7 +90,7 @@ class SolarSystem3D{
         
         var earth_xradius = 0.3; // earth local x-radius
         var earth_a = 4.3; // earth orbit local semi-major axis
-        var earth_rotperiod = 5; // earth rotation period in seconds
+        var earth_rotperiod = 2; // earth rotation period in seconds
         var earth_revperiod = 10; // earth revolution period in seconds
 
         this.#controller = new Controller(earth_xradius, earth_a, earth_rotperiod, earth_revperiod);
@@ -108,28 +108,57 @@ class SolarSystem3D{
 
     #setWorldMatrix(){
 
+        // get planets data
+
         var mercury_radius = this.#mercury.getSize();
+        var mercury_tilt = this.#mercury.getTilt();
+
         var venus_radius = this.#venus.getSize();
+        var venus_tilt = this.#venus.getTilt();
+
         var earth_radius = this.#earth.getSize();
+        var earth_tilt = this.#earth.getTilt();
+
         var mars_radius = this.#mars.getSize();
+        var mars_tilt = this.#mars.getTilt();
+
         var jupiter_radius = this.#jupiter.getSize();
+        var jupiter_tilt = this.#jupiter.getTilt();
+
         var saturn_radius = this.#saturn.getSize();
+        var saturn_tilt = this.#saturn.getTilt();
+
         var uranus_radius = this.#uranus.getSize();
+        var uranus_tilt = this.#uranus.getTilt();
+
         var neptune_radius = this.#neptune.getSize();
+        var neptune_tilt = this.#neptune.getTilt();
+
+        // sun
 
         // this.#suMod.scale.copy(new THREE.Vector3(1, 1, 1));
+
+        // mercury
 
         this.#meMod.scale.copy(new THREE.Vector3(
             mercury_radius.x,
             mercury_radius.y,
             mercury_radius.z
         ));
+
+        this.#meMod.rotateZ(mercury_tilt);
         
+        // venus
+
         this.#veMod.scale.copy(new THREE.Vector3(
             venus_radius.x,
             venus_radius.y,
             venus_radius.z
         ));
+
+        this.#veMod.rotateZ(venus_tilt);
+
+        // earth
 
         this.#eaMod.scale.copy(new THREE.Vector3(
             earth_radius.x,
@@ -137,11 +166,19 @@ class SolarSystem3D{
             earth_radius.z
         ));
 
+        this.#eaMod.rotateZ(earth_tilt);
+
+        // mars
+
         this.#maMod.scale.copy(new THREE.Vector3(
             mars_radius.x,
             mars_radius.y,
             mars_radius.z
         ));
+
+        this.#maMod.rotateZ(mars_tilt);
+
+        // jupiter
 
         this.#juMod.scale.copy(new THREE.Vector3(
             jupiter_radius.x,
@@ -149,11 +186,19 @@ class SolarSystem3D{
             jupiter_radius.z
         ));
 
+        this.#juMod.rotateZ(jupiter_tilt);
+
+        // saturn
+
         this.#saMod.scale.copy(new THREE.Vector3(
             saturn_radius.x,
             saturn_radius.y,
             saturn_radius.z
         ));
+
+        this.#saMod.rotateZ(saturn_tilt);
+
+        // uranus
 
         this.#urMod.scale.copy(new THREE.Vector3(
             uranus_radius.x,
@@ -161,11 +206,17 @@ class SolarSystem3D{
             uranus_radius.z
         ));
 
+        this.#urMod.rotateZ(uranus_tilt);
+
+        // neptune
+
         this.#neMod.scale.copy(new THREE.Vector3(
             neptune_radius.x,
             neptune_radius.y,
             neptune_radius.z
         ));
+
+        this.#neMod.rotateZ(neptune_tilt);
 
     }
 
@@ -200,9 +251,11 @@ class SolarSystem3D{
         requestAnimationFrame(this.#animate.bind(this));
 
         // get time interval
+
         var deltaT = this.#clock.getDelta();
 
         // update planets 
+
         this.#mercury.updatePosition(deltaT);
         this.#mercury.updateRotation(deltaT);
 
@@ -228,36 +281,66 @@ class SolarSystem3D{
         this.#neptune.updateRotation(deltaT);
 
         // get planets data
+
         var mercury_position = this.#mercury.getPosition();
         var mercury_rotation = this.#mercury.getRotation();
+        var mercury_tilt = this.#mercury.getTilt();
 
         var venus_position = this.#venus.getPosition();
         var venus_rotation = this.#venus.getRotation();
+        var venus_tilt = this.#venus.getTilt();
 
         var earth_position = this.#earth.getPosition();
         var earth_rotation = this.#earth.getRotation();
+        var earth_tilt = this.#earth.getTilt();
 
         var mars_position = this.#mars.getPosition();
         var mars_rotation = this.#mars.getRotation();
+        var mars_tilt = this.#mars.getTilt();
 
         var jupiter_position = this.#jupiter.getPosition();
         var jupiter_rotation = this.#jupiter.getRotation();
+        var jupiter_tilt = this.#jupiter.getTilt();
 
         var saturn_position = this.#saturn.getPosition();
         var saturn_rotation = this.#saturn.getRotation();
+        var saturn_tilt = this.#saturn.getTilt();
 
         var uranus_position = this.#uranus.getPosition();
         var uranus_rotation = this.#uranus.getRotation();
+        var uranus_tilt = this.#uranus.getTilt();
 
         var neptune_position = this.#neptune.getPosition();
         var neptune_rotation = this.#neptune.getRotation();
+        var neptune_tilt = this.#neptune.getTilt();
 
-        // render planets
+        // mercury
+
+        this.#meMod.setRotationFromAxisAngle(
+            new THREE.Vector3(
+                - Math.sin(mercury_tilt),
+                + Math.cos(mercury_tilt),
+                0
+            ),
+            mercury_rotation
+        );
+
         this.#meMod.position.copy(new THREE.Vector3(
             mercury_position.x,
             mercury_position.y,
             mercury_position.z
         ));
+
+        // venus
+
+        this.#veMod.setRotationFromAxisAngle(
+            new THREE.Vector3(
+                - Math.sin(venus_tilt),
+                + Math.cos(venus_tilt),
+                0
+            ),
+            venus_rotation
+        );
 
         this.#veMod.position.copy(new THREE.Vector3(
             venus_position.x,
@@ -265,11 +348,33 @@ class SolarSystem3D{
             venus_position.z
         ));
 
+        // earth
+
+        this.#eaMod.setRotationFromAxisAngle(
+            new THREE.Vector3(
+                - Math.sin(earth_tilt),
+                + Math.cos(earth_tilt),
+                0
+            ),
+            earth_rotation
+        );
+
         this.#eaMod.position.copy(new THREE.Vector3(
             earth_position.x,
             earth_position.y,
             earth_position.z
         ));
+
+        // mars
+
+        this.#maMod.setRotationFromAxisAngle(
+            new THREE.Vector3(
+                - Math.sin(mars_tilt),
+                + Math.cos(mars_tilt),
+                0
+            ),
+            mars_rotation
+        );
 
         this.#maMod.position.copy(new THREE.Vector3(
             mars_position.x,
@@ -277,11 +382,33 @@ class SolarSystem3D{
             mars_position.z
         ));
 
+        // jupiter
+
+        this.#juMod.setRotationFromAxisAngle(
+            new THREE.Vector3(
+                - Math.sin(jupiter_tilt),
+                + Math.cos(jupiter_tilt),
+                0
+            ),
+            jupiter_rotation
+        );
+
         this.#juMod.position.copy(new THREE.Vector3(
             jupiter_position.x,
             jupiter_position.y,
             jupiter_position.z
         ));
+
+        // saturn
+
+        this.#saMod.setRotationFromAxisAngle(
+            new THREE.Vector3(
+                - Math.sin(saturn_tilt),
+                + Math.cos(saturn_tilt),
+                0
+            ),
+            saturn_rotation
+        );
 
         this.#saMod.position.copy(new THREE.Vector3(
             saturn_position.x,
@@ -289,11 +416,33 @@ class SolarSystem3D{
             saturn_position.z
         ));
 
+        // uranus
+
+        this.#urMod.setRotationFromAxisAngle(
+            new THREE.Vector3(
+                - Math.sin(uranus_tilt),
+                + Math.cos(uranus_tilt),
+                0
+            ),
+            uranus_rotation
+        );
+
         this.#urMod.position.copy(new THREE.Vector3(
             uranus_position.x,
             uranus_position.y,
             uranus_position.z
         ));
+
+        // neptune
+
+        this.#neMod.setRotationFromAxisAngle(
+            new THREE.Vector3(
+                - Math.sin(neptune_tilt),
+                + Math.cos(neptune_tilt),
+                0
+            ),
+            neptune_rotation
+        );
 
         this.#neMod.position.copy(new THREE.Vector3(
             neptune_position.x,
