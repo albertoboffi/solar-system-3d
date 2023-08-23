@@ -47,15 +47,15 @@ class SolarSystem3D{
         
         // create materials
 
-        const suMat = new THREE.MeshBasicMaterial({ map: suTe });
-        const meMat = new THREE.MeshBasicMaterial({ map: meTe });
-        const veMat = new THREE.MeshBasicMaterial({ map: veTe });
-        const eaMat = new THREE.MeshBasicMaterial({ map: eaTe });
-        const maMat = new THREE.MeshBasicMaterial({ map: maTe });
-        const juMat = new THREE.MeshBasicMaterial({ map: juTe });
-        const saMat = new THREE.MeshBasicMaterial({ map: saTe });
-        const urMat = new THREE.MeshBasicMaterial({ map: urTe });
-        const neMat = new THREE.MeshBasicMaterial({ map: neTe });
+        const suMat = new THREE.MeshBasicMaterial({ map: suTe }); // not affected by light
+        const meMat = new THREE.MeshStandardMaterial({ map: meTe });
+        const veMat = new THREE.MeshStandardMaterial({ map: veTe });
+        const eaMat = new THREE.MeshStandardMaterial({ map: eaTe });
+        const maMat = new THREE.MeshStandardMaterial({ map: maTe });
+        const juMat = new THREE.MeshStandardMaterial({ map: juTe });
+        const saMat = new THREE.MeshStandardMaterial({ map: saTe });
+        const urMat = new THREE.MeshStandardMaterial({ map: urTe });
+        const neMat = new THREE.MeshStandardMaterial({ map: neTe });
 
         // create mesh
 
@@ -243,6 +243,14 @@ class SolarSystem3D{
         this.#controls = new FlyControls(this.#camera, this.#renderer.domElement);
         this.#controls.movementSpeed = 2;
         this.#controls.rollSpeed = 0.5;
+
+    }
+
+    #setLight(){
+        
+        const light = new THREE.PointLight(0xffffff, 1, 0, 2);
+        light.position.set(0, 0, 0);
+        this.#scene.add(light);
 
     }
 
@@ -463,6 +471,7 @@ class SolarSystem3D{
         this.#setController();
         this.#setWorldMatrix();
         this.#setViewProjectionMatrix();
+        this.#setLight();
         this.#animate();
 
     }
