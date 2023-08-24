@@ -12,7 +12,8 @@ class SolarSystem3D{
     #clock;
 
     // scene entities
-    #suMod; #meMod; #veMod; #eaMod; #maMod; #juMod; #saMod; #urMod; #neMod; // models
+    #suMod; #meMod; #veMod; #eaMod; #maMod; #juMod; #saMod; #urMod; #neMod; // planets models
+    #meNameMod; #veNameMod; #eaNameMod; #maNameMod; #juNameMod; #saNameMod; #urNameMod; #neNameMod; // planets name models
     #mercury; #venus; #earth; #mars; #jupiter; #saturn; #uranus; #neptune; // objects
 
     //controller
@@ -44,6 +45,15 @@ class SolarSystem3D{
         const saTe = new THREE.TextureLoader().load("textures/planets/saturn.jpg");
         const urTe = new THREE.TextureLoader().load("textures/planets/uranus.jpg");
         const neTe = new THREE.TextureLoader().load("textures/planets/neptune.jpg");
+
+        const meNameTe = new THREE.TextureLoader().load("textures/planets-names/mercury.png");
+        const veNameTe = new THREE.TextureLoader().load("textures/planets-names/venus.png");
+        const eaNameTe = new THREE.TextureLoader().load("textures/planets-names/earth.png");
+        const maNameTe = new THREE.TextureLoader().load("textures/planets-names/mars.png");
+        const juNameTe = new THREE.TextureLoader().load("textures/planets-names/jupiter.png");
+        const saNameTe = new THREE.TextureLoader().load("textures/planets-names/saturn.png");
+        const urNameTe = new THREE.TextureLoader().load("textures/planets-names/uranus.png");
+        const neNameTe = new THREE.TextureLoader().load("textures/planets-names/neptune.png");
         
         // create materials
 
@@ -57,10 +67,22 @@ class SolarSystem3D{
         const urMat = new THREE.MeshStandardMaterial({ map: urTe });
         const neMat = new THREE.MeshStandardMaterial({ map: neTe });
 
+        const meNameMat = new THREE.MeshBasicMaterial({ map: meNameTe, transparent: true });
+        const veNameMat = new THREE.MeshBasicMaterial({ map: veNameTe, transparent: true });
+        const eaNameMat = new THREE.MeshBasicMaterial({ map: eaNameTe, transparent: true });
+        const maNameMat = new THREE.MeshBasicMaterial({ map: maNameTe, transparent: true });
+        const juNameMat = new THREE.MeshBasicMaterial({ map: juNameTe, transparent: true });
+        const saNameMat = new THREE.MeshBasicMaterial({ map: saNameTe, transparent: true });
+        const urNameMat = new THREE.MeshBasicMaterial({ map: urNameTe, transparent: true });
+        const neNameMat = new THREE.MeshBasicMaterial({ map: neNameTe, transparent: true });
+
         // create mesh
 
         const sphereRadius = 1, sphereXSegments = 100, sphereYSegments = 100;
         const sphere = new THREE.SphereGeometry(sphereRadius, sphereXSegments, sphereYSegments);
+
+        const name_texture_ratio = 720 / 1280;
+        const plane = new THREE.PlaneGeometry(1, name_texture_ratio);
 
         // create models
         
@@ -74,6 +96,15 @@ class SolarSystem3D{
         this.#urMod = new THREE.Mesh(sphere, urMat);
         this.#neMod = new THREE.Mesh(sphere, neMat);
 
+        this.#meNameMod = new THREE.Mesh(plane, meNameMat);
+        this.#veNameMod = new THREE.Mesh(plane, veNameMat);
+        this.#eaNameMod = new THREE.Mesh(plane, eaNameMat);
+        this.#maNameMod = new THREE.Mesh(plane, maNameMat);
+        this.#juNameMod = new THREE.Mesh(plane, juNameMat);
+        this.#saNameMod = new THREE.Mesh(plane, saNameMat);
+        this.#urNameMod = new THREE.Mesh(plane, urNameMat);
+        this.#neNameMod = new THREE.Mesh(plane, neNameMat);
+
         this.#scene.add(this.#suMod);
         this.#scene.add(this.#meMod);
         this.#scene.add(this.#veMod);
@@ -83,6 +114,15 @@ class SolarSystem3D{
         this.#scene.add(this.#saMod);
         this.#scene.add(this.#urMod);
         this.#scene.add(this.#neMod);
+
+        this.#scene.add(this.#meNameMod);
+        this.#scene.add(this.#veNameMod);
+        this.#scene.add(this.#eaNameMod);
+        this.#scene.add(this.#maNameMod);
+        this.#scene.add(this.#juNameMod);
+        this.#scene.add(this.#saNameMod);
+        this.#scene.add(this.#urNameMod);
+        this.#scene.add(this.#neNameMod);
         
     }
 
@@ -113,26 +153,42 @@ class SolarSystem3D{
         var mercury_radius = this.#mercury.getSize();
         var mercury_tilt = this.#mercury.getTilt();
 
+        var mercury_name_size = this.#mercury.getNameSize();
+
         var venus_radius = this.#venus.getSize();
         var venus_tilt = this.#venus.getTilt();
+
+        var venus_name_size = this.#venus.getNameSize();
 
         var earth_radius = this.#earth.getSize();
         var earth_tilt = this.#earth.getTilt();
 
+        var earth_name_size = this.#earth.getNameSize();
+
         var mars_radius = this.#mars.getSize();
         var mars_tilt = this.#mars.getTilt();
+
+        var mars_name_size = this.#mars.getNameSize();
 
         var jupiter_radius = this.#jupiter.getSize();
         var jupiter_tilt = this.#jupiter.getTilt();
 
+        var jupiter_name_size = this.#jupiter.getNameSize();
+
         var saturn_radius = this.#saturn.getSize();
         var saturn_tilt = this.#saturn.getTilt();
+
+        var saturn_name_size = this.#saturn.getNameSize();
 
         var uranus_radius = this.#uranus.getSize();
         var uranus_tilt = this.#uranus.getTilt();
 
+        var uranus_name_size = this.#uranus.getNameSize();
+
         var neptune_radius = this.#neptune.getSize();
         var neptune_tilt = this.#neptune.getTilt();
+
+        var neptune_name_size = this.#neptune.getNameSize();
 
         // sun
 
@@ -147,6 +203,12 @@ class SolarSystem3D{
         ));
 
         this.#meMod.rotateZ(mercury_tilt);
+
+        this.#meNameMod.scale.copy(new THREE.Vector3(
+            mercury_name_size.x,
+            mercury_name_size.y,
+            mercury_name_size.z
+        ));
         
         // venus
 
@@ -158,6 +220,12 @@ class SolarSystem3D{
 
         this.#veMod.rotateZ(venus_tilt);
 
+        this.#veNameMod.scale.copy(new THREE.Vector3(
+            venus_name_size.x,
+            venus_name_size.y,
+            venus_name_size.z
+        ));
+
         // earth
 
         this.#eaMod.scale.copy(new THREE.Vector3(
@@ -167,6 +235,12 @@ class SolarSystem3D{
         ));
 
         this.#eaMod.rotateZ(earth_tilt);
+
+        this.#eaNameMod.scale.copy(new THREE.Vector3(
+            earth_name_size.x,
+            earth_name_size.y,
+            earth_name_size.z
+        ));
 
         // mars
 
@@ -178,6 +252,12 @@ class SolarSystem3D{
 
         this.#maMod.rotateZ(mars_tilt);
 
+        this.#maNameMod.scale.copy(new THREE.Vector3(
+            mars_name_size.x,
+            mars_name_size.y,
+            mars_name_size.z
+        ));
+
         // jupiter
 
         this.#juMod.scale.copy(new THREE.Vector3(
@@ -187,6 +267,12 @@ class SolarSystem3D{
         ));
 
         this.#juMod.rotateZ(jupiter_tilt);
+
+        this.#juNameMod.scale.copy(new THREE.Vector3(
+            jupiter_name_size.x,
+            jupiter_name_size.y,
+            jupiter_name_size.z
+        ));
 
         // saturn
 
@@ -198,6 +284,12 @@ class SolarSystem3D{
 
         this.#saMod.rotateZ(saturn_tilt);
 
+        this.#saNameMod.scale.copy(new THREE.Vector3(
+            saturn_name_size.x,
+            saturn_name_size.y,
+            saturn_name_size.z
+        ));
+
         // uranus
 
         this.#urMod.scale.copy(new THREE.Vector3(
@@ -208,6 +300,12 @@ class SolarSystem3D{
 
         this.#urMod.rotateZ(uranus_tilt);
 
+        this.#urNameMod.scale.copy(new THREE.Vector3(
+            uranus_name_size.x,
+            uranus_name_size.y,
+            uranus_name_size.z
+        ));
+
         // neptune
 
         this.#neMod.scale.copy(new THREE.Vector3(
@@ -217,6 +315,12 @@ class SolarSystem3D{
         ));
 
         this.#neMod.rotateZ(neptune_tilt);
+
+        this.#neNameMod.scale.copy(new THREE.Vector3(
+            neptune_name_size.x,
+            neptune_name_size.y,
+            neptune_name_size.z
+        ));
 
     }
 
@@ -241,7 +345,7 @@ class SolarSystem3D{
         // set camera motion in fly mode
         
         this.#controls = new FlyControls(this.#camera, this.#renderer.domElement);
-        this.#controls.movementSpeed = 2;
+        this.#controls.movementSpeed = 3;
         this.#controls.rollSpeed = 0.5;
 
     }
@@ -294,33 +398,49 @@ class SolarSystem3D{
         var mercury_rotation = this.#mercury.getRotation();
         var mercury_tilt = this.#mercury.getTilt();
 
+        var mercury_name_position = this.#mercury.getNamePosition();
+
         var venus_position = this.#venus.getPosition();
         var venus_rotation = this.#venus.getRotation();
         var venus_tilt = this.#venus.getTilt();
+
+        var venus_name_position = this.#venus.getNamePosition();
 
         var earth_position = this.#earth.getPosition();
         var earth_rotation = this.#earth.getRotation();
         var earth_tilt = this.#earth.getTilt();
 
+        var earth_name_position = this.#earth.getNamePosition();
+
         var mars_position = this.#mars.getPosition();
         var mars_rotation = this.#mars.getRotation();
         var mars_tilt = this.#mars.getTilt();
+
+        var mars_name_position = this.#mars.getNamePosition();
 
         var jupiter_position = this.#jupiter.getPosition();
         var jupiter_rotation = this.#jupiter.getRotation();
         var jupiter_tilt = this.#jupiter.getTilt();
 
+        var jupiter_name_position = this.#jupiter.getNamePosition();
+
         var saturn_position = this.#saturn.getPosition();
         var saturn_rotation = this.#saturn.getRotation();
         var saturn_tilt = this.#saturn.getTilt();
+
+        var saturn_name_position = this.#saturn.getNamePosition();
 
         var uranus_position = this.#uranus.getPosition();
         var uranus_rotation = this.#uranus.getRotation();
         var uranus_tilt = this.#uranus.getTilt();
 
+        var uranus_name_position = this.#uranus.getNamePosition();
+
         var neptune_position = this.#neptune.getPosition();
         var neptune_rotation = this.#neptune.getRotation();
         var neptune_tilt = this.#neptune.getTilt();
+
+        var neptune_name_position = this.#neptune.getNamePosition();
 
         // mercury
 
@@ -337,6 +457,12 @@ class SolarSystem3D{
             mercury_position.x,
             mercury_position.y,
             mercury_position.z
+        ));
+
+        this.#meNameMod.position.copy(new THREE.Vector3(
+            mercury_name_position.x,
+            mercury_name_position.y,
+            mercury_name_position.z
         ));
 
         // venus
@@ -356,6 +482,12 @@ class SolarSystem3D{
             venus_position.z
         ));
 
+        this.#veNameMod.position.copy(new THREE.Vector3(
+            venus_name_position.x,
+            venus_name_position.y,
+            venus_name_position.z
+        ));
+
         // earth
 
         this.#eaMod.setRotationFromAxisAngle(
@@ -371,6 +503,12 @@ class SolarSystem3D{
             earth_position.x,
             earth_position.y,
             earth_position.z
+        ));
+
+        this.#eaNameMod.position.copy(new THREE.Vector3(
+            earth_name_position.x,
+            earth_name_position.y,
+            earth_name_position.z
         ));
 
         // mars
@@ -390,6 +528,12 @@ class SolarSystem3D{
             mars_position.z
         ));
 
+        this.#maNameMod.position.copy(new THREE.Vector3(
+            mars_name_position.x,
+            mars_name_position.y,
+            mars_name_position.z
+        ));
+
         // jupiter
 
         this.#juMod.setRotationFromAxisAngle(
@@ -405,6 +549,12 @@ class SolarSystem3D{
             jupiter_position.x,
             jupiter_position.y,
             jupiter_position.z
+        ));
+
+        this.#juNameMod.position.copy(new THREE.Vector3(
+            jupiter_name_position.x,
+            jupiter_name_position.y,
+            jupiter_name_position.z
         ));
 
         // saturn
@@ -424,6 +574,12 @@ class SolarSystem3D{
             saturn_position.z
         ));
 
+        this.#saNameMod.position.copy(new THREE.Vector3(
+            saturn_name_position.x,
+            saturn_name_position.y,
+            saturn_name_position.z
+        ));
+
         // uranus
 
         this.#urMod.setRotationFromAxisAngle(
@@ -441,6 +597,12 @@ class SolarSystem3D{
             uranus_position.z
         ));
 
+        this.#urNameMod.position.copy(new THREE.Vector3(
+            uranus_name_position.x,
+            uranus_name_position.y,
+            uranus_name_position.z
+        ));
+
         // neptune
 
         this.#neMod.setRotationFromAxisAngle(
@@ -456,6 +618,12 @@ class SolarSystem3D{
             neptune_position.x,
             neptune_position.y,
             neptune_position.z
+        ));
+
+        this.#neNameMod.position.copy(new THREE.Vector3(
+            neptune_name_position.x,
+            neptune_name_position.y,
+            neptune_name_position.z
         ));
 
         this.#controls.update(deltaT);

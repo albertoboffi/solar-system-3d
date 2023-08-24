@@ -137,4 +137,28 @@ export default class Planet{
 
     }
 
+    getNameSize(){
+        
+        const size = {};
+        size.x = Math.max(Math.min(1.75 * this.#radius.x, 5), 1);
+        size.y = size.x;
+        size.z = size.x;
+
+        return size;
+
+    }
+
+    getNamePosition(){
+
+        const planet_position = this.getPosition();
+        const name_position = {};
+
+        name_position.x = planet_position.x;
+        name_position.y = planet_position.y + this.getNameSize().y // + this.#radius.y;
+        name_position.z = planet_position.z;
+
+        return name_position;
+
+    }
+
 }
