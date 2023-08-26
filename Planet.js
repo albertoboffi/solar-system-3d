@@ -10,11 +10,12 @@ export default class Planet{
     #theta;
 
     // ORBIT
-    #a; // semi-major axis
-    #b; // semi-minor axis
-    #c = {}; // center
+    #a;
+    #b;
+    #c = {};
     #inclination;
-    #phi; // track of the position of the planet around the orbit
+    #phi;
+    #rev_active;
 
     // ANGULAR SPEEDS
     #rot_speed;
@@ -57,6 +58,9 @@ export default class Planet{
         this.#inclination = planet_orbit["inclination"];
         this.#phi = 0;
 
+        // Control
+        this.#rev_active = true;
+
     }
 
     #setSpeeds(earth_rotperiod, earth_revperiod, planet_periods, earth_periods){
@@ -90,8 +94,20 @@ export default class Planet{
 
     updatePosition(deltaT){
 
-        this.#phi += deltaT * this.#rev_speed;
+        this.#phi += deltaT * this.#rev_speed * this.#rev_active;
         this.#phi %= 2 * Math.PI;
+
+    }
+    
+    enableRevolution(){
+
+        this.#rev_active = true;
+
+    }
+
+    disableRevolution(){
+
+        this.#rev_active = false;
 
     }
 

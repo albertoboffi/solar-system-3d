@@ -55,12 +55,12 @@ class SolarSystem3D{
         const urNameTe = new THREE.TextureLoader().load("textures/planets-names/uranus.png");
         const neNameTe = new THREE.TextureLoader().load("textures/planets-names/neptune.png");
 
-        const cubeMapTeLoader = new THREE.CubeTextureLoader().setPath("textures/skybox/");
-        const cubeMapTe = cubeMapTeLoader.load([
-            "px.jpg", "nx.jpg",
-            "py.jpg", "ny.jpg",
-            "pz.jpg", "nz.jpg"
-        ]);
+        // const cubeMapTeLoader = new THREE.CubeTextureLoader().setPath("textures/skybox/");
+        // const cubeMapTe = cubeMapTeLoader.load([
+        //     "px.jpg", "nx.jpg",
+        //     "py.jpg", "ny.jpg",
+        //     "pz.jpg", "nz.jpg"
+        // ]);
         
         // create materials
 
@@ -131,7 +131,7 @@ class SolarSystem3D{
         this.#scene.add(this.#urNameMod);
         this.#scene.add(this.#neNameMod);
 
-        this.#scene.background = cubeMapTe;
+        // this.#scene.background = cubeMapTe;
         
     }
 
