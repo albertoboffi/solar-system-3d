@@ -366,6 +366,19 @@ class SolarSystem3D{
         this.#scene.add(light);
 
     }
+    
+    #handleWindowResizing(){
+        
+        var self = this;
+        
+        window.addEventListener("resize", function(){
+            
+            self.#renderer.setSize(window.innerWidth, window.innerHeight);
+            self.#camera.aspect = window.innerWidth / window.innerHeight;
+            self.#camera.updateProjectionMatrix();
+
+        });
+    }
 
     #animate(){
 
@@ -649,6 +662,7 @@ class SolarSystem3D{
         this.#setWorldMatrix();
         this.#setViewProjectionMatrix();
         this.#setLight();
+        this.#handleWindowResizing();
         this.#animate();
 
     }
