@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import Controller from './Controller.js';
-import { FlyControls } from 'three/addons/controls/FlyControls.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 class SolarSystem3D{
 
@@ -55,12 +55,12 @@ class SolarSystem3D{
         const urNameTe = new THREE.TextureLoader().load("textures/planets-names/uranus.png");
         const neNameTe = new THREE.TextureLoader().load("textures/planets-names/neptune.png");
 
-        // const cubeMapTeLoader = new THREE.CubeTextureLoader().setPath("textures/skybox/");
-        // const cubeMapTe = cubeMapTeLoader.load([
-        //     "px.jpg", "nx.jpg",
-        //     "py.jpg", "ny.jpg",
-        //     "pz.jpg", "nz.jpg"
-        // ]);
+        const cubeMapTeLoader = new THREE.CubeTextureLoader().setPath("textures/skybox/");
+        const cubeMapTe = cubeMapTeLoader.load([
+            "px.jpg", "nx.jpg",
+            "py.jpg", "ny.jpg",
+            "pz.jpg", "nz.jpg"
+        ]);
         
         // create materials
 
@@ -74,14 +74,14 @@ class SolarSystem3D{
         const urMat = new THREE.MeshStandardMaterial({ map: urTe });
         const neMat = new THREE.MeshStandardMaterial({ map: neTe });
 
-        const meNameMat = new THREE.MeshBasicMaterial({ map: meNameTe, transparent: true });
-        const veNameMat = new THREE.MeshBasicMaterial({ map: veNameTe, transparent: true });
-        const eaNameMat = new THREE.MeshBasicMaterial({ map: eaNameTe, transparent: true });
-        const maNameMat = new THREE.MeshBasicMaterial({ map: maNameTe, transparent: true });
-        const juNameMat = new THREE.MeshBasicMaterial({ map: juNameTe, transparent: true });
-        const saNameMat = new THREE.MeshBasicMaterial({ map: saNameTe, transparent: true });
-        const urNameMat = new THREE.MeshBasicMaterial({ map: urNameTe, transparent: true });
-        const neNameMat = new THREE.MeshBasicMaterial({ map: neNameTe, transparent: true });
+        const meNameMat = new THREE.MeshBasicMaterial({ map: meNameTe, transparent: true, side: THREE.DoubleSide });
+        const veNameMat = new THREE.MeshBasicMaterial({ map: veNameTe, transparent: true, side: THREE.DoubleSide });
+        const eaNameMat = new THREE.MeshBasicMaterial({ map: eaNameTe, transparent: true, side: THREE.DoubleSide });
+        const maNameMat = new THREE.MeshBasicMaterial({ map: maNameTe, transparent: true, side: THREE.DoubleSide });
+        const juNameMat = new THREE.MeshBasicMaterial({ map: juNameTe, transparent: true, side: THREE.DoubleSide });
+        const saNameMat = new THREE.MeshBasicMaterial({ map: saNameTe, transparent: true, side: THREE.DoubleSide });
+        const urNameMat = new THREE.MeshBasicMaterial({ map: urNameTe, transparent: true, side: THREE.DoubleSide });
+        const neNameMat = new THREE.MeshBasicMaterial({ map: neNameTe, transparent: true, side: THREE.DoubleSide });
 
         // create mesh
 
@@ -353,7 +353,7 @@ class SolarSystem3D{
 
         // set camera motion in fly mode
         
-        this.#controls = new FlyControls(this.#camera, this.#renderer.domElement);
+        this.#controls = new OrbitControls(this.#camera, this.#renderer.domElement);
         this.#controls.movementSpeed = 3;
         this.#controls.rollSpeed = 0.5;
 
