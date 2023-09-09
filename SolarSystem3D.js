@@ -131,7 +131,7 @@ class SolarSystem3D{
         this.#scene.add(this.#urNameMod);
         this.#scene.add(this.#neNameMod);
 
-        // this.#scene.background = cubeMapTe;
+        this.#scene.background = cubeMapTe;
         
     }
 
@@ -351,10 +351,9 @@ class SolarSystem3D{
 
         this.#camera.position.set(0, 0, 8);
 
-        // set camera motion in fly mode
+        // set camera motion in orbit mode
         
         this.#controls = new OrbitControls(this.#camera, this.#renderer.domElement);
-        this.#controls.movementSpeed = 3;
         this.#controls.rollSpeed = 0.5;
 
     }
@@ -369,7 +368,7 @@ class SolarSystem3D{
     
     #handleWindowResizing(){
         
-        var self = this;
+        const self = this;
         
         window.addEventListener("resize", function(){
             
