@@ -12,7 +12,7 @@ class SolarSystem3D{
     #clock;
 
     // scene entities
-    #suMod; #meMod; #veMod; #eaMod; #maMod; #juMod; #saMod; #urMod; #neMod; // planets models
+    #suMod; #meMod; #veMod; #eaMod; #maMod; #juMod; #saMod; #saRiMod; #urMod; #neMod; // planets models
     #meNameMod; #veNameMod; #eaNameMod; #maNameMod; #juNameMod; #saNameMod; #urNameMod; #neNameMod; // planets name models
     #mercury; #venus; #earth; #mars; #jupiter; #saturn; #uranus; #neptune; // objects
 
@@ -43,6 +43,7 @@ class SolarSystem3D{
         const maTe = new THREE.TextureLoader().load("textures/planets/mars.jpg");
         const juTe = new THREE.TextureLoader().load("textures/planets/jupiter.jpg");
         const saTe = new THREE.TextureLoader().load("textures/planets/saturn.jpg");
+        const saRiTe = new THREE.TextureLoader().load("textures/planets/saturn-ring.png");
         const urTe = new THREE.TextureLoader().load("textures/planets/uranus.jpg");
         const neTe = new THREE.TextureLoader().load("textures/planets/neptune.jpg");
 
@@ -71,6 +72,7 @@ class SolarSystem3D{
         const maMat = new THREE.MeshStandardMaterial({ map: maTe });
         const juMat = new THREE.MeshStandardMaterial({ map: juTe });
         const saMat = new THREE.MeshStandardMaterial({ map: saTe });
+        const saRiMat = new THREE.MeshStandardMaterial({ map: saRiTe, transparent: true, side: THREE.DoubleSide });
         const urMat = new THREE.MeshStandardMaterial({ map: urTe });
         const neMat = new THREE.MeshStandardMaterial({ map: neTe });
 
@@ -88,6 +90,8 @@ class SolarSystem3D{
         const sphereRadius = 1, sphereXSegments = 100, sphereYSegments = 100;
         const sphere = new THREE.SphereGeometry(sphereRadius, sphereXSegments, sphereYSegments);
 
+        const ring = new THREE.RingGeometry(1, 2);
+
         const name_texture_ratio = 720 / 1280;
         const plane = new THREE.PlaneGeometry(1, name_texture_ratio);
 
@@ -100,6 +104,7 @@ class SolarSystem3D{
         this.#maMod = new THREE.Mesh(sphere, maMat);
         this.#juMod = new THREE.Mesh(sphere, juMat);
         this.#saMod = new THREE.Mesh(sphere, saMat);
+        this.#saRiMod = new THREE.Mesh(ring, saRiMat);
         this.#urMod = new THREE.Mesh(sphere, urMat);
         this.#neMod = new THREE.Mesh(sphere, neMat);
 
@@ -119,6 +124,7 @@ class SolarSystem3D{
         this.#scene.add(this.#maMod);
         this.#scene.add(this.#juMod);
         this.#scene.add(this.#saMod);
+        this.#scene.add(this.#saRiMod);
         this.#scene.add(this.#urMod);
         this.#scene.add(this.#neMod);
 
@@ -291,7 +297,19 @@ class SolarSystem3D{
             saturn_radius.z
         ));
 
+        this.#saRiMod.scale.copy(new THREE.Vector3(
+            saturn_radius.x,
+            saturn_radius.y,
+            saturn_radius.z
+        ));
+
         this.#saMod.rotateZ(saturn_tilt);
+
+        this.#saRiMod.rotation.copy(new THREE.Euler(
+            Math.PI / 2,
+            saturn_tilt,
+            0
+        ));
 
         this.#saNameMod.scale.copy(new THREE.Vector3(
             saturn_name_size.x,
@@ -590,6 +608,12 @@ class SolarSystem3D{
         );
 
         this.#saMod.position.copy(new THREE.Vector3(
+            saturn_position.x,
+            saturn_position.y,
+            saturn_position.z
+        ));
+
+        this.#saRiMod.position.copy(new THREE.Vector3(
             saturn_position.x,
             saturn_position.y,
             saturn_position.z
