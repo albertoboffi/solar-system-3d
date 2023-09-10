@@ -13,7 +13,9 @@ body{
 #cookie_disclaimer{
 
     position: fixed;
+    box-sizing: border-box;
     margin: 0;
+    padding: 0 10px;
     width: 100%;
     bottom: 10px;
 
