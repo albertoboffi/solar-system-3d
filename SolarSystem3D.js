@@ -485,8 +485,8 @@ class SolarSystem3D{
 
         this.#meMod.setRotationFromAxisAngle(
             new THREE.Vector3(
-                - Math.sin(mercury_tilt),
-                + Math.cos(mercury_tilt),
+                0, // - Math.sin(mercury_tilt),
+                1, // + Math.cos(mercury_tilt),
                 0
             ),
             mercury_rotation
@@ -508,8 +508,8 @@ class SolarSystem3D{
 
         this.#veMod.setRotationFromAxisAngle(
             new THREE.Vector3(
-                - Math.sin(venus_tilt),
-                + Math.cos(venus_tilt),
+                0, // - Math.sin(venus_tilt),
+                1, // + Math.cos(venus_tilt),
                 0
             ),
             venus_rotation
@@ -531,8 +531,8 @@ class SolarSystem3D{
 
         this.#eaMod.setRotationFromAxisAngle(
             new THREE.Vector3(
-                - Math.sin(earth_tilt),
-                + Math.cos(earth_tilt),
+                0, // - Math.sin(earth_tilt),
+                1, // + Math.cos(earth_tilt),
                 0
             ),
             earth_rotation
@@ -554,8 +554,8 @@ class SolarSystem3D{
 
         this.#maMod.setRotationFromAxisAngle(
             new THREE.Vector3(
-                - Math.sin(mars_tilt),
-                + Math.cos(mars_tilt),
+                0, // - Math.sin(mars_tilt),
+                1, // + Math.cos(mars_tilt),
                 0
             ),
             mars_rotation
@@ -577,8 +577,8 @@ class SolarSystem3D{
 
         this.#juMod.setRotationFromAxisAngle(
             new THREE.Vector3(
-                - Math.sin(jupiter_tilt),
-                + Math.cos(jupiter_tilt),
+                0, // - Math.sin(jupiter_tilt),
+                1, // + Math.cos(jupiter_tilt),
                 0
             ),
             jupiter_rotation
@@ -600,8 +600,8 @@ class SolarSystem3D{
 
         this.#saMod.setRotationFromAxisAngle(
             new THREE.Vector3(
-                - Math.sin(saturn_tilt),
-                + Math.cos(saturn_tilt),
+                0, //- Math.sin(saturn_tilt),
+                1, //+ Math.cos(saturn_tilt),
                 0
             ),
             saturn_rotation
@@ -629,8 +629,8 @@ class SolarSystem3D{
 
         this.#urMod.setRotationFromAxisAngle(
             new THREE.Vector3(
-                - Math.sin(uranus_tilt),
-                + Math.cos(uranus_tilt),
+                0, // - Math.sin(uranus_tilt),
+                1, // + Math.cos(uranus_tilt),
                 0
             ),
             uranus_rotation
@@ -652,8 +652,8 @@ class SolarSystem3D{
 
         this.#neMod.setRotationFromAxisAngle(
             new THREE.Vector3(
-                - Math.sin(neptune_tilt),
-                + Math.cos(neptune_tilt),
+                0, // - Math.sin(neptune_tilt),
+                1, // + Math.cos(neptune_tilt),
                 0
             ),
             neptune_rotation
