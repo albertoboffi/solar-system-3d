@@ -435,49 +435,49 @@ class SolarSystem3D{
 
         var mercury_position = this.#mercury.getPosition();
         var mercury_rotation = this.#mercury.getRotation();
-        var mercury_tilt = this.#mercury.getTilt();
+        // var mercury_tilt = this.#mercury.getTilt();
 
         var mercury_name_position = this.#mercury.getNamePosition();
 
         var venus_position = this.#venus.getPosition();
         var venus_rotation = this.#venus.getRotation();
-        var venus_tilt = this.#venus.getTilt();
+        // var venus_tilt = this.#venus.getTilt();
 
         var venus_name_position = this.#venus.getNamePosition();
 
         var earth_position = this.#earth.getPosition();
         var earth_rotation = this.#earth.getRotation();
-        var earth_tilt = this.#earth.getTilt();
+        // var earth_tilt = this.#earth.getTilt();
 
         var earth_name_position = this.#earth.getNamePosition();
 
         var mars_position = this.#mars.getPosition();
         var mars_rotation = this.#mars.getRotation();
-        var mars_tilt = this.#mars.getTilt();
+        // var mars_tilt = this.#mars.getTilt();
 
         var mars_name_position = this.#mars.getNamePosition();
 
         var jupiter_position = this.#jupiter.getPosition();
         var jupiter_rotation = this.#jupiter.getRotation();
-        var jupiter_tilt = this.#jupiter.getTilt();
+        // var jupiter_tilt = this.#jupiter.getTilt();
 
         var jupiter_name_position = this.#jupiter.getNamePosition();
 
         var saturn_position = this.#saturn.getPosition();
         var saturn_rotation = this.#saturn.getRotation();
-        var saturn_tilt = this.#saturn.getTilt();
+        // var saturn_tilt = this.#saturn.getTilt();
 
         var saturn_name_position = this.#saturn.getNamePosition();
 
         var uranus_position = this.#uranus.getPosition();
         var uranus_rotation = this.#uranus.getRotation();
-        var uranus_tilt = this.#uranus.getTilt();
+        // var uranus_tilt = this.#uranus.getTilt();
 
         var uranus_name_position = this.#uranus.getNamePosition();
 
         var neptune_position = this.#neptune.getPosition();
         var neptune_rotation = this.#neptune.getRotation();
-        var neptune_tilt = this.#neptune.getTilt();
+        // var neptune_tilt = this.#neptune.getTilt();
 
         var neptune_name_position = this.#neptune.getNamePosition();
 
@@ -504,6 +504,8 @@ class SolarSystem3D{
             mercury_name_position.z
         ));
 
+        this.#meNameMod.lookAt(this.#camera.position);
+
         // venus
 
         this.#veMod.setRotationFromAxisAngle(
@@ -526,6 +528,8 @@ class SolarSystem3D{
             venus_name_position.y,
             venus_name_position.z
         ));
+
+        this.#veNameMod.lookAt(this.#camera.position);
 
         // earth
 
@@ -550,6 +554,8 @@ class SolarSystem3D{
             earth_name_position.z
         ));
 
+        this.#eaNameMod.lookAt(this.#camera.position);
+
         // mars
 
         this.#maMod.setRotationFromAxisAngle(
@@ -573,6 +579,8 @@ class SolarSystem3D{
             mars_name_position.z
         ));
 
+        this.#maNameMod.lookAt(this.#camera.position);
+
         // jupiter
 
         this.#juMod.setRotationFromAxisAngle(
@@ -595,6 +603,8 @@ class SolarSystem3D{
             jupiter_name_position.y,
             jupiter_name_position.z
         ));
+
+        this.#juNameMod.lookAt(this.#camera.position);
 
         // saturn
 
@@ -625,6 +635,8 @@ class SolarSystem3D{
             saturn_name_position.z
         ));
 
+        this.#saNameMod.lookAt(this.#camera.position);
+
         // uranus
 
         this.#urMod.setRotationFromAxisAngle(
@@ -648,6 +660,8 @@ class SolarSystem3D{
             uranus_name_position.z
         ));
 
+        this.#urNameMod.lookAt(this.#camera.position);
+
         // neptune
 
         this.#neMod.setRotationFromAxisAngle(
@@ -670,6 +684,8 @@ class SolarSystem3D{
             neptune_name_position.y,
             neptune_name_position.z
         ));
+
+        this.#neNameMod.lookAt(this.#camera.position);
 
         this.#controls.update(deltaT);
 
