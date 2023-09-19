@@ -2,71 +2,132 @@ import SolarSystemData from './solar-system-data.js';
 
 export default class Planet{
     
-    // SHAPE
+    // planet shape
     #radius = {};
     #tilt;
 
-    // ROTATION
+    // rotation
     #theta;
+    #rot_speed;
 
-    // ORBIT
-    #a;
-    #b;
-    #c = {};
+    // orbit shape
+    #a; #b; #c = {};
     #inclination;
+
+    // revolution
     #phi;
     #rev_active;
-
-    // ANGULAR SPEEDS
-    #rot_speed;
     #rev_speed;
 
-    #getRatio(earth_app_val, planet_val, earth_val){
+    /*
+        PARAMETERS:
+            > earth_app_val -> numerical value of a physical quantity referred to the earth inside the application
+            > earth_val -> real numerical values of the same quantity referred to the earth
+            > planet_val -> real numerical values of the same quantity referred to the current planet
+
+        RETURNED VALUE:
+            > numerical value of the same quantity referred to the current planet inside the application
+    */
+    #getRatio(earth_app_val, earth_val, planet_val){
         
         return earth_app_val * planet_val / earth_val;
     
     }
 
-    #setShape(earth_xradius, planet_shape, earth_shape){
+    #setShape(earth_xradius, earth_shape, planet_shape){
         
-        this.#radius.x = this.#getRatio(earth_xradius, planet_shape["equatorial_radius"], earth_shape["equatorial_radius"]);
-        this.#radius.y = this.#radius.x; // spherical approximation
-        this.#radius.z = this.#radius.x; // spherical approximation
+        // the planet is approximated as a sphere
+
+        this.#radius.x = this.#getRatio(
+            earth_xradius,
+            earth_shape["equatorial_radius"],
+            planet_shape["equatorial_radius"]
+        );
+        this.#radius.y = this.#radius.x;
+        this.#radius.z = this.#radius.x;
+
+        // the axial tilt is the angle between the rotational axis of the planet and its orbital axis (the line perpendicular to its orbital plane)
+        // we can approximate it as the angle between the planet's rotational axis and the y-axis
+        // to describe it relative to the x-axis, we just need to take the inverse of the angle
 
         this.#tilt = - planet_shape["axial_tilt"];
 
     }
 
-    #setOrbit(earth_a, planet_orbit, earth_orbit){
+    #setRotation(){
 
-        // Ellipse axis
+        // angle describing the orientation of the planet along its axis
+        // as an approximation, we consider an initial orientation of 0 rad regardless of the position of the planet along the orbit
 
-        this.#a = this.#getRatio(earth_a, planet_orbit["semi_major_axis"], earth_orbit["semi_major_axis"]);
+        this.#theta = 0;
+
+    }
+
+    #setOrbit(earth_a, earth_orbit, planet_orbit){
+
+        // ellipse axis
+        // if we scale both axis by the same factor, the eccentricity does not change
+
+        this.#a = this.#getRatio(
+            earth_a,
+            earth_orbit["semi_major_axis"],
+            planet_orbit["semi_major_axis"]
+        );
+        
         this.#b = this.#a * Math.sqrt(1 - Math.pow(planet_orbit["eccentricity"], 2));
 
-        // Ellipse center
-        
+        // ellipse center
+        // as approximation, we consider the imaginary line connecting aphelion and perihelion always parallel to the x-axis
+
         const radius_diff = planet_orbit["aphelion"] - planet_orbit["semi_major_axis"];
-        const c_shift = this.#getRatio(earth_a, radius_diff, earth_orbit["semi_major_axis"]);
         
-        if (planet_orbit["aphelion_dir"] == 'r') this.#c.x = - c_shift;
-        else this.#c.x = c_shift;
+        const c_shift = this.#getRatio(
+            earth_a,
+            earth_orbit["semi_major_axis"],
+            radius_diff
+        );
+        
+        if (planet_orbit["aphelion_dir"] == 'r'){
+            this.#c.x = - c_shift;
+        }
+        else{
+            this.#c.x = c_shift;
+        }
+
         this.#c.y = 0; this.#c.z = 0;
 
-        // Angles
+        // ellipse inclination
+        // the inclination is always counterclockwise with respect to the x-axis (?)
 
         this.#inclination = planet_orbit["inclination"];
+
+    }
+
+    #setRevolution(){
+
+        // the position is described with the angle that the planet forms with respect to the x-axis
+        
         this.#phi = 0;
 
-        // Control
+        // control
+
         this.#rev_active = true;
 
     }
 
-    #setSpeeds(earth_rotperiod, earth_revperiod, planet_periods, earth_periods){
+    #setSpeeds(earth_rotperiod, earth_revperiod, earth_periods, planet_periods){
 
-        const rot_period = this.#getRatio(earth_rotperiod, planet_periods["synodic_rotation_period"], earth_periods["synodic_rotation_period"]);
-        const rev_period = this.#getRatio(earth_revperiod, planet_periods["sideral_orbital_period"], earth_periods["sideral_orbital_period"]);
+        const rot_period = this.#getRatio(
+            earth_rotperiod,
+            earth_periods["synodic_rotation_period"],
+            planet_periods["synodic_rotation_period"]
+        );
+
+        const rev_period = this.#getRatio(
+            earth_revperiod,
+            earth_periods["sideral_orbital_period"],
+            planet_periods["sideral_orbital_period"]
+        );
 
         this.#rot_speed = 2 * Math.PI / rot_period;
         this.#rev_speed = 2 * Math.PI / rev_period;
@@ -74,21 +135,43 @@ export default class Planet{
     }
 
     constructor(earth_xradius, earth_a, earth_rotperiod, earth_revperiod, planet_name){
-            
-        const planet_data = SolarSystemData[planet_name];
+        
+        // get real data
+
         const earth_data = SolarSystemData["earth"];
+        const planet_data = SolarSystemData[planet_name];
 
-        // SHAPE
-        this.#setShape(earth_xradius, planet_data["shape"], earth_data["shape"]);
-            
-        // ROTATION
-        this.#theta = 0;
+        // generate application data
 
-        // ORBIT
-        this.#setOrbit(earth_a, planet_data["orbit"], earth_data["orbit"]);
+        this.#setShape(
+            earth_xradius,
+            earth_data["shape"],
+            planet_data["shape"]
+        );
 
-        // SPEEDS
-        this.#setSpeeds(earth_rotperiod, earth_revperiod, planet_data["periods"], earth_data["periods"]);
+        this.#setRotation();
+
+        this.#setOrbit(
+            earth_a,
+            earth_data["orbit"],
+            planet_data["orbit"]
+        );
+        
+        this.#setRevolution();
+        
+        this.#setSpeeds(
+            earth_rotperiod,
+            earth_revperiod,
+            earth_data["periods"],
+            planet_data["periods"]
+        );
+
+    }
+
+    updateRotation(deltaT){
+
+        this.#theta += deltaT * this.#rot_speed;
+        this.#theta %= 2 * Math.PI;
 
     }
 
@@ -108,13 +191,6 @@ export default class Planet{
     disableRevolution(){
 
         this.#rev_active = false;
-
-    }
-
-    updateRotation(deltaT){
-
-        this.#theta += deltaT * this.#rot_speed;
-        this.#theta %= 2 * Math.PI;
 
     }
 
@@ -141,11 +217,13 @@ export default class Planet{
         var position = {};
 
         // flat orbit position
+
         position.x = this.#a * Math.cos(this.#phi) - this.#c.x;
         position.y = 0 - this.#c.y;
         position.z = this.#b * Math.sin(this.#phi) - this.#c.z;
         
         // projection of the point on the inclined orbit
+
         position.x = position.x * Math.cos(this.#inclination) - position.y * Math.sin(this.#inclination);
         position.y = position.x * Math.sin(this.#inclination) + position.y * Math.cos(this.#inclination);
 

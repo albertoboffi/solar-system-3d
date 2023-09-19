@@ -16,7 +16,7 @@ class SolarSystem3D{
     #meNameMod; #veNameMod; #eaNameMod; #maNameMod; #juNameMod; #saNameMod; #urNameMod; #neNameMod; // planets name models
     #mercury; #venus; #earth; #mars; #jupiter; #saturn; #uranus; #neptune; // objects
 
-    //controller
+    // controller
     #controller;
 
     #initScene(){

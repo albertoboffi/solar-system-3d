@@ -35,7 +35,7 @@ export default {
         shape: {
             equatorial_radius: 6051.8,
             polar_radius: 6051.8,
-            axial_tilt: 0.04607669
+            axial_tilt: 3.0955159613
         },
 
         orbit: {
@@ -48,7 +48,7 @@ export default {
 
         periods: {
             sideral_orbital_period: 224.701,
-            synodic_rotation_period: -116.75
+            synodic_rotation_period: 116.75
         },
 
         light: {
@@ -173,7 +173,7 @@ export default {
 
         periods: {
             sideral_orbital_period: 30688.5,
-            synodic_rotation_period: -0.71832
+            synodic_rotation_period: 0.71832
         },
 
         light: {
