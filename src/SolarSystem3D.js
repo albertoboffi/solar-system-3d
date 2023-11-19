@@ -36,27 +36,27 @@ class SolarSystem3D{
 
         // load textures
 
-        const suTe = new THREE.TextureLoader().load("textures/sun.jpg");
-        const meTe = new THREE.TextureLoader().load("textures/planets/mercury.jpg");
-        const veTe = new THREE.TextureLoader().load("textures/planets/venus.jpg");
-        const eaTe = new THREE.TextureLoader().load("textures/planets/earth.jpg");
-        const maTe = new THREE.TextureLoader().load("textures/planets/mars.jpg");
-        const juTe = new THREE.TextureLoader().load("textures/planets/jupiter.jpg");
-        const saTe = new THREE.TextureLoader().load("textures/planets/saturn.jpg");
-        const saRiTe = new THREE.TextureLoader().load("textures/planets/saturn-ring.png");
-        const urTe = new THREE.TextureLoader().load("textures/planets/uranus.jpg");
-        const neTe = new THREE.TextureLoader().load("textures/planets/neptune.jpg");
+        const suTe = new THREE.TextureLoader().load("assets/textures/sun.jpg");
+        const meTe = new THREE.TextureLoader().load("assets/textures/planets/mercury.jpg");
+        const veTe = new THREE.TextureLoader().load("assets/textures/planets/venus.jpg");
+        const eaTe = new THREE.TextureLoader().load("assets/textures/planets/earth.jpg");
+        const maTe = new THREE.TextureLoader().load("assets/textures/planets/mars.jpg");
+        const juTe = new THREE.TextureLoader().load("assets/textures/planets/jupiter.jpg");
+        const saTe = new THREE.TextureLoader().load("assets/textures/planets/saturn.jpg");
+        const saRiTe = new THREE.TextureLoader().load("assets/textures/planets/saturn-ring.png");
+        const urTe = new THREE.TextureLoader().load("assets/textures/planets/uranus.jpg");
+        const neTe = new THREE.TextureLoader().load("assets/textures/planets/neptune.jpg");
 
-        const meNameTe = new THREE.TextureLoader().load("textures/planets-names/mercury.png");
-        const veNameTe = new THREE.TextureLoader().load("textures/planets-names/venus.png");
-        const eaNameTe = new THREE.TextureLoader().load("textures/planets-names/earth.png");
-        const maNameTe = new THREE.TextureLoader().load("textures/planets-names/mars.png");
-        const juNameTe = new THREE.TextureLoader().load("textures/planets-names/jupiter.png");
-        const saNameTe = new THREE.TextureLoader().load("textures/planets-names/saturn.png");
-        const urNameTe = new THREE.TextureLoader().load("textures/planets-names/uranus.png");
-        const neNameTe = new THREE.TextureLoader().load("textures/planets-names/neptune.png");
+        const meNameTe = new THREE.TextureLoader().load("assets/textures/planets-names/mercury.png");
+        const veNameTe = new THREE.TextureLoader().load("assets/textures/planets-names/venus.png");
+        const eaNameTe = new THREE.TextureLoader().load("assets/textures/planets-names/earth.png");
+        const maNameTe = new THREE.TextureLoader().load("assets/textures/planets-names/mars.png");
+        const juNameTe = new THREE.TextureLoader().load("assets/textures/planets-names/jupiter.png");
+        const saNameTe = new THREE.TextureLoader().load("assets/textures/planets-names/saturn.png");
+        const urNameTe = new THREE.TextureLoader().load("assets/textures/planets-names/uranus.png");
+        const neNameTe = new THREE.TextureLoader().load("assets/textures/planets-names/neptune.png");
 
-        const cubeMapTeLoader = new THREE.CubeTextureLoader().setPath("textures/skybox/");
+        const cubeMapTeLoader = new THREE.CubeTextureLoader().setPath("assets/textures/skybox/");
         const cubeMapTe = cubeMapTeLoader.load([
             "px.jpg", "nx.jpg",
             "py.jpg", "ny.jpg",
