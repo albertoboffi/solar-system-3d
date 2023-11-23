@@ -1,6 +1,6 @@
 function hideCookieBanner(){
 
-    document.getElementById('cookie_disclaimer').style.display = 'none';
+    document.getElementById("cookie").style.display = 'none';
 
 }
 

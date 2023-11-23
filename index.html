@@ -21,7 +21,7 @@
 
         <!-- internal resources -->
         <link rel = "stylesheet" href = "assets/css/style.css" />  
-        <link rel = "icon" href = "assets/img/icon.jpg" />
+        <link rel = "icon" href = "assets/img/icon.png" />
         <script src = "assets/js/script.js" ></script>
 
         <!-- imports -->
@@ -40,9 +40,12 @@
 
     <body onload = "handleCookieBannerDisplay();">
 
-        <p id = "cookie_disclaimer"> This website does not use cookies.
+        <p id = "cookie" class = "disclaimer"> This website does not use cookies.
             (<span onclick = "cookieAck();">Got it</span>)
         </p>
+
+        <p id = "website_info" class = "disclaimer"> Alberto Boffi • BFFLRT99M15C933V </p>
+        
         <script type = "module" src = "src/SolarSystem3D.js"></script>
 
     </body>

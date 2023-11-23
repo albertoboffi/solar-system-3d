@@ -10,25 +10,38 @@ body{
 
 }
 
-#cookie_disclaimer{
+.disclaimer{
 
     position: fixed;
-    box-sizing: border-box;
     margin: 0;
-    padding: 0 10px;
-    width: 100%;
-    bottom: 10px;
 
     font-family: ProductSans-Regular;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.8);
+
+}
+
+#cookie{
+    
+    width: 100%;
+    bottom: 20px;
+
     text-align: center;
 
 }
 
-#cookie_disclaimer > span{
+#cookie > span{
 
     text-decoration: underline;
     cursor: pointer;
+
+}
+
+#website_info{
+
+    right: 8px;
+    bottom: 5px;
+
+    font-size: 13px;
 
 }
 
