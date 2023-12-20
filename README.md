@@ -1,4 +1,4 @@
-# Solar System 3D Viewer
+# Solar System 3D Simulator
 
 ![solar_system](./docs/img/cover.jpg)
 
@@ -6,18 +6,20 @@
 
 <div style="display: flex;">
 
-<img align="left" width="250" src="./docs/img/logo.jpg" />
+<img align="left" width="300" src="./docs/img/logo.jpg" />
 
 <div style = "margin: auto; overflow: hidden;">
 
-**3D Solar System Viewer** (<https://solar-system.cloud>) is a web application developed using WebGL and THREE.js, designed to simulate the solar system in three dimensions. The application accurately represents the scale, dimensions, distances, orbital shapes, rotation, and revolution speeds of celestial bodies. Currently in a developmental stage, this educational project aspires to depict the entire complexity of the solar system on screen.
+**Solar System 3D Simulator** (<https://solar-system.cloud>) is a web application developed using WebGL and THREE.js, designed to simulate the solar system in three dimensions. The application accurately represents the scale, dimensions, distances, orbital shapes, rotation, and revolution speeds of celestial bodies.
+
+Currently in a developmental stage, this educational project aspires to depict the entire complexity of the solar system on screen.
 
 </div>
 
 </div>
 
-<img src="./docs/img/screenshots/screenshots_1_2.jpg" />
-<img src="./docs/img/screenshots/screenshots_3_4.jpg" />
+<img src="./docs/img/screenshots/screenshots_1_2.png" />
+<img src="./docs/img/screenshots/screenshots_3_4.png" />
 
 ## 💡 Authors
 * [Alberto Boffi](https://github.com/albertoboffi): Software Development
