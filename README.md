@@ -6,11 +6,11 @@
 
 <div style="display: flex;">
 
-<img align="left" width="300" src="./docs/img/logo.jpg" />
+<img align="left" width="300" src="./docs/img/logo.png" />
 
 <div style = "margin: auto; overflow: hidden;">
 
-**Solar System 3D Simulator** (<https://solar-system.cloud>) is a web application developed using WebGL and THREE.js, designed to simulate the solar system in three dimensions. The application accurately represents the scale, dimensions, distances, orbital shapes, rotation, and revolution speeds of celestial bodies.
+**Solar System 3D Simulator** (<https://solar-system.netsons.org>) is a web application developed using WebGL and THREE.js, designed to simulate the solar system in three dimensions. The application accurately represents the scale, dimensions, distances, orbital shapes, rotation, and revolution speeds of celestial bodies.
 
 Currently in a developmental stage, this educational project aspires to depict the entire complexity of the solar system on screen.
 
@@ -25,7 +25,7 @@ Currently in a developmental stage, this educational project aspires to depict t
 * [Alberto Boffi](https://github.com/albertoboffi): Software Development
 * [Grecya D'Angiò](https://github.com/grecyadangio): Creative Lead
 ## 🦾 Usage
-The application is accessible at the following [link](https://solar-system.cloud/).
+The application is accessible at the following [link](https://solar-system.netsons.org/).
 
 To run it on localhost:
 1. Make sure [Node.js](https://nodejs.org/en) in installed on your system.
